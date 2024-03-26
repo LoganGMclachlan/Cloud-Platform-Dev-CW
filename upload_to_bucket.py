@@ -1,3 +1,10 @@
+# Author: Logan Mclachlan, s2225362
+# Last Updated: 20/3/2024
+
+# This script will upload 5 images from an ec2
+# instance to an s3 bucket. Each image is uploaded
+# 10 seconds appart.
+
 import boto3
 import time
 

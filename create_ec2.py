@@ -1,3 +1,9 @@
+# Author: Logan Mclachlan, s2225362
+# Last Updated: 15/3/2024
+
+# This script will create a new ec2 instance with
+# the ami for a basic linux machine.
+
 import boto3
 
 ec2 = boto3.client("ec2")

@@ -1,3 +1,9 @@
+# Author: Logan Mclachlan, s2225362
+# Last Updated: 15/3/2024
+
+# This script will create a new s3 bucket with
+# the title mybuckets2225362.
+
 import boto3
 
 s3 = boto3.client("s3")
