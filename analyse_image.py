@@ -47,20 +47,11 @@ def analyse_image(image):
 
 # extracts important info into readable object
 def format_result(result,image):
-    formatted = {"Image":image,"Faces":[]}
+    formatted = {"Image":image,"Emotions":[]}
     # loops through every face detected
     for face in result["FaceDetails"]:
-        # sets most confidant emotion to first option
-        most_confident = face["Emotions"][0]
-        # loops through emotion options
-        for emotion in face["Emotions"]:
-            # checks for most confidant emotion
-            if (emotion["Confidence"] > most_confident["Confidence"]):
-                most_confident = emotion
-        # adds most confidant emotion for a face to formatted list
-        formatted["Faces"].append(most_confident)
-    # final data structure example:
-    # {"Image":"image1","Faces":[{"Type":"HAPPY","Confidance":98.04},{"Type":"SAD","Confidance":94.23}]}
+        # extracts first 5 emotions for each face
+        formatted["Emotions"].append(face["Emotions"][:5])
     return formatted
 
 # records record of result to dynamoDB
