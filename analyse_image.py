@@ -54,8 +54,6 @@ def format_result(result,image):
         formatted["Emotions"].append(face["Emotions"][:5])
     return formatted
 
-# WARNING: Below functions are untested
-
 # records record of result to dynamoDB
 def record_result(result):
     records = db.Table('MyDynamoDBTemplateS2225362-myDynamoDBTable-IHDW0QM0JDRR')
