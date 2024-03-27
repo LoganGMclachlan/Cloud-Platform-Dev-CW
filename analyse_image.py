@@ -16,8 +16,8 @@ db = boto3.resource("dynamodb")
 # handles the event trigger
 def lambda_handler(event, context):
     result = analyse_image(get_image(event))
-    record_result(result)
     print(result)
+    record_result(result)
 
     return {
         'statusCode': 200,
@@ -58,16 +58,18 @@ def format_result(result,image):
 
 # records record of result to dynamoDB
 def record_result(result):
-    records = db.Table('MyDynamoDBTemplateS2225362')
+    records = db.Table('MyDynamoDBTemplateS2225362-myDynamoDBTable-IHDW0QM0JDRR')
     records.put_item(Item={
         # key saved as image name
-        "Image":result["Image"],
+        "PrimaryKey":result["Image"],
+        "No. of Faces":len(result["Emotions"]),
         # gets confidence levels for all emotions
         "Happy": check_emotion("HAPPY",result),
         "Sad": check_emotion("SAD",result),
         "Angry": check_emotion("ANGRY",result),
         "Surpirsed": check_emotion("SURPRISED",result),
         "Frustrated": check_emotion("FRUSTRATED",result),
+        "Disgusted": check_emotion("DISGUSTED",result),
         "Calm": check_emotion("CALM",result),
         "Confused": check_emotion("CONFUSED",result)}
     )
@@ -78,7 +80,7 @@ def check_emotion(target,result):
     values = ""
     for face in result["Emotions"]:# loops for each face detected
         for emotion in face:# loops for all emotion responses
-            if(emotion["Type"] == target)
-                values += emotion["Confidence"] + " "
+            if(emotion["Type"] == target):
+                values += str(round(emotion["Confidence"],4)) + ", "
                 break# exits 2nd loop if emotion is found
     return values
