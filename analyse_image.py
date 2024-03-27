@@ -11,7 +11,7 @@ import boto3
 # set up boto clients to access aws components
 rekognition = boto3.client('rekognition')
 s3 = boto3.client("s3")
-db = boto3.client("dynamodb")
+db = boto3.resource("dynamodb")
 
 # handles the event trigger
 def lambda_handler(event, context):
@@ -54,6 +54,31 @@ def format_result(result,image):
         formatted["Emotions"].append(face["Emotions"][:5])
     return formatted
 
+# WARNING: Below functions are untested
+
 # records record of result to dynamoDB
 def record_result(result):
+    records = db.Table('MyDynamoDBTemplateS2225362')
+    records.put_item(Item={
+        # key saved as image name
+        "Image":result["Image"],
+        # gets confidence levels for all emotions
+        "Happy": check_emotion("HAPPY",result),
+        "Sad": check_emotion("SAD",result),
+        "Angry": check_emotion("ANGRY",result),
+        "Surpirsed": check_emotion("SURPRISED",result),
+        "Frustrated": check_emotion("FRUSTRATED",result),
+        "Calm": check_emotion("CALM",result),
+        "Confused": check_emotion("CONFUSED",result)}
+    )
     print("Result recorded.")
+
+# returns all confidance levels of a target emotion within a set of results
+def check_emotion(target,result):
+    values = ""
+    for face in result["Emotions"]:# loops for each face detected
+        for emotion in face:# loops for all emotion responses
+            if(emotion["Type"] == target)
+                values += emotion["Confidence"] + " "
+                break# exits 2nd loop if emotion is found
+    return values
