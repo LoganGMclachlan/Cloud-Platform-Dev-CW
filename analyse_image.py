@@ -1,5 +1,5 @@
 # Author: Logan Mclachlan, s2225362
-# Last Updated: 26/3/2024
+# Last Updated: 27/3/2024
 
 # This script will fetch an image from a SQS event,
 # use rekognition to analyse the image, then create
