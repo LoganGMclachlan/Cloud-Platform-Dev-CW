@@ -1,0 +1,13 @@
+{
+    "Version": "2012-10-17",
+    "Id": "Policy1711112587726",
+    "Statement": [
+        {
+            "Sid": "Stmt1711112548851",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "sqs:SendMessage",
+            "Resource": "arn:aws:sqs:us-east-1:891377312372:MySQSS2225362-MyQueue-hbyihMZ1YCjQ"
+        }
+    ]
+}

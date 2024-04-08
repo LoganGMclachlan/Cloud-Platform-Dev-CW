@@ -1,0 +1,5 @@
+SQS:
+https://s3-us-west-1.amazonaws.com/cloudformation-templates-us-west-1/SQS.template
+
+DynamoDB: 
+https://s3-us-west-1.amazonaws.com/cloudformation-templates-us-west-1/DynamoDB_Table.template
